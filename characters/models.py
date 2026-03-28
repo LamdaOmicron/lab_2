@@ -24,7 +24,7 @@ class Character(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True)
     objects = models.Manager()          # стандартный менеджер (включая удалённые)
     active = ActiveManager()            # менеджер для активных записей
-    
+    deleted_at = models.DateTimeField(null=True, blank=True)
     class Meta:
         db_table = 'characters'
         ordering = ['-created_at']
