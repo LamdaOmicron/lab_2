@@ -38,5 +38,35 @@ else
     echo "✓ Все параметры git уже настроены корректно."
 fi
 
+# Опция клонирования репозитория lab_2
+echo ""
+read -p "Хотите клонировать репозиторий lab_2? (y/n): " clone_choice
+if [[ "$clone_choice" =~ ^[Yy]$ ]]; then
+    echo ""
+    # Запрос URL репозитория
+    read -p "Введите URL репозитория lab_2 (например, https://github.com/user/lab_2.git): " repo_url
+    if [ -z "$repo_url" ]; then
+        echo "❌ URL не указан. Клонирование отменено."
+    else
+        # Запрос директории для клонирования (по умолчанию текущая)
+        read -p "Введите директорию для клонирования (оставьте пустым для текущей): " target_dir
+        if [ -z "$target_dir" ]; then
+            target_dir="."
+        fi
+
+        # Проверка существования git
+        if ! command -v git &> /dev/null; then
+            echo "❌ Git не установлен. Невозможно выполнить клонирование."
+        else
+            echo "Клонирование репозитория $repo_url в $target_dir ..."
+            if git clone "$repo_url" "$target_dir"; then
+                echo "✅ Репозиторий успешно клонирован."
+            else
+                echo "❌ Ошибка при клонировании репозитория."
+            fi
+        fi
+    fi
+fi
+
 echo ""
 read -p "Нажмите Enter для выхода..."
