@@ -22,6 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/characters/', CharacterListCreateView.as_view(), name='character-list'),
     path('api/characters/<uuid:character_id>/', CharacterDetailView.as_view(), name='character-detail'),
-    path('api/characters/', include('characters.urls')),
     path('auth/', include('auth.urls')),
 ]   
