@@ -11,9 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем весь проект
 COPY . .
+
 # Открываем порт, который слушает приложение
 EXPOSE 4200
 
-# Точка входа: выполняем миграции и запускаем сервер
-#CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:${PORT:-4200}"]
-CMD ["sh", "-c", "python manage.py migrate --noinput && exec python manage.py runserver 0.0.0.0:4200"]
+# Точка входа: запускаем приложение через uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "4200"]
